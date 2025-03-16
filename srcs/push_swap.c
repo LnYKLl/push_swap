@@ -12,40 +12,55 @@
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+static void	init_stack_a(t_stack *a, int argc, char **argv)
 {
-    t_stack a;
-    t_stack b;
-    int i;
-    if  (check_int(argc, argv) == 0)
-        return (0);
-    if (argc < 2)
-        return (0);
-    a.size = argc - 1;
-    a.arr = (int *)malloc(sizeof(int) * a.size);
-    if (!a.arr)
-        return (0);
-    i = 0;
-    while (i < a.size)
-    {
-        a.arr[i] = ft_atoi(argv[i + 1]);
-        i++;
-    }
-    b.size = 0;
-    b.arr = NULL;
-    return (0);
+	int	i;
+
+	a->size = argc - 1;
+	a->arr = (int *)malloc(sizeof(int) * a->size);
+	if (!a->arr)
+		return ;
+	i = 0;
+	while (i < a->size)
+	{
+		a->arr[i] = ft_atoi(argv[i + 1]);
+		i++;
+	}
 }
 
-int check_int(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    int i;
+	t_stack	a;
+	t_stack	b;
 
-    i = 1;
-    while (i < argc)
-    {
-        if (ft_atoi(argv[i]) == 0)
-            return (0);
-        i++;
-    }
-    return (1);
+	if (argc < 2)
+		return (0);
+	if (check_int(argc, argv) == 0)
+		return (0);
+	init_stack_a(&a, argc, argv);
+	if (!a.arr)
+		return (0);
+	b.size = 0;
+	b.arr = NULL;
+	if (!is_sorted(&a))
+		turk_algorithm(&a, &b);
+	if (a.arr)
+		free(a.arr);
+	if (b.arr)
+		free(b.arr);
+	return (0);
+}
+
+int	check_int(int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_atoi(argv[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -27,7 +27,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_FILES = push_swap.c \
             push.c \
             rotate.c \
-            swap.c
+            swap.c \
+            reverse_rotate.c \
+            utils.c \
+            algorithm.c \
+            sort_small.c \
+            turk_utils.c \
+            turk_operations.c
 
 # Object files
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
