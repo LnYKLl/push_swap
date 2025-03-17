@@ -4,46 +4,73 @@
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 14:56:42 by lkiloul           #+#    #+#             */
-/*   Updated: 2025/03/11 15:01:47 by lkiloul          ###   ########.fr       */
+/*   Created: 2025/02/20 02:39:53 by lkiloul           #+#    #+#             */
+/*   Updated: 2025/03/17 15:27:30 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "push_swap.h"
+#include "push_swap.h"
 
-void reverse_rotate(t_stack *stack)
+/*
+ * Reverse rotate the stack (shift down all elements by 1, the last becomes first)
+ * Returns 1 if successful, 0 if stack has less than 2 elements
+ */
+static int	reverse_rotate(t_stack *stack)
 {
-    int i;
-    int last;
+	int	last;
+	int	i;
 
-    i = stack->size - 1;
-    if (stack == NULL || stack->size < 2)
-        return ;
-    last = stack->arr[stack->size - 1];
-    while (i > 0)
-    {
-        stack->arr[i] = stack->arr[i - 1];
-        i--;
-    }
-    stack->arr[0] = last;
+	if (stack->size < 2)
+		return (0);
+	last = stack->arr[stack->size - 1];
+	i = stack->size - 1;
+	while (i > 0)
+	{
+		stack->arr[i] = stack->arr[i - 1];
+		i--;
+	}
+	stack->arr[0] = last;
+	return (1);
 }
 
-void reverse_rotate_a(t_stack *a)
+/*
+ * Reverse rotate stack a
+ * Print "rra" if successful
+ */
+void	rra(t_stack *a)
 {
-    reverse_rotate(a);
-    ft_printf("rra\n");
+	if (reverse_rotate(a))
+		write(1, "rra\n", 4);
 }
 
-void reverse_rotate_b(t_stack *b)
+/*
+ * Reverse rotate stack b
+ * Print "rrb" if successful
+ */
+void	rrb(t_stack *b)
 {
-    reverse_rotate(b);
-    ft_printf("rrb\n");
+	if (reverse_rotate(b))
+		write(1, "rrb\n", 4);
 }
 
-void reverse_rotate_both(t_stack  *a, t_stack *b)
+/*
+ * Reverse rotate both stack a and stack b
+ * Print "rrr" if both reverse rotations are successful
+ */
+void	rrr(t_stack *a, t_stack *b)
 {
-    reverse_rotate(a);
-    reverse_rotate(b);
-    ft_printf("rrr\n");
+	int	success_a;
+	int	success_b;
+
+	success_a = reverse_rotate(a);
+	success_b = reverse_rotate(b);
+	if (success_a && success_b)
+		write(1, "rrr\n", 4);
+	else
+	{
+		if (success_a)
+			write(1, "rra\n", 4);
+		if (success_b)
+			write(1, "rrb\n", 4);
+	}
 }

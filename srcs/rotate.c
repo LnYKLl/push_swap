@@ -5,44 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 02:35:05 by lkiloul           #+#    #+#             */
-/*   Updated: 2025/03/10 16:33:54 by lkiloul          ###   ########.fr       */
+/*   Created: 2025/02/20 02:39:32 by lkiloul           #+#    #+#             */
+/*   Updated: 2025/03/17 15:26:53 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_stack *stack)
+/*
+ * Rotate the stack (shift up all elements by 1, the first becomes the last)
+ * Returns 1 if successful, 0 if stack has less than 2 elements
+ */
+static int	rotate(t_stack *stack)
 {
-	int	i;
 	int	first;
+	int	i;
 
-	i = 0;
-	if (stack == NULL || stack->size < 2)
-		return ;
+	if (stack->size < 2)
+		return (0);
 	first = stack->arr[0];
+	i = 0;
 	while (i < stack->size - 1)
 	{
 		stack->arr[i] = stack->arr[i + 1];
-        i++;
+		i++;
 	}
 	stack->arr[stack->size - 1] = first;
+	return (1);
 }
 
-void	rotate_a(t_stack *a)
+/*
+ * Rotate stack a
+ * Print "ra" if successful
+ */
+void	ra(t_stack *a)
 {
-	rotate(a);
-	ft_printf("ra\n");
+	if (rotate(a))
+		write(1, "ra\n", 3);
 }
 
-void	rotate_b(t_stack *b)
+/*
+ * Rotate stack b
+ * Print "rb" if successful
+ */
+void	rb(t_stack *b)
 {
-	rotate(b);
-	ft_printf("rb\n");
+	if (rotate(b))
+		write(1, "rb\n", 3);
 }
-void	rotate_both(t_stack *a, t_stack *b)
+
+/*
+ * Rotate both stack a and stack b
+ * Print "rr" if both rotations are successful
+ */
+void	rr(t_stack *a, t_stack *b)
 {
-	rotate(a);
-	rotate(b);
-	ft_printf("rr\n");
+	int	success_a;
+	int	success_b;
+
+	success_a = rotate(a);
+	success_b = rotate(b);
+	if (success_a && success_b)
+		write(1, "rr\n", 3);
+	else
+	{
+		if (success_a)
+			write(1, "ra\n", 3);
+		if (success_b)
+			write(1, "rb\n", 3);
+	}
 }

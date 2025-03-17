@@ -5,65 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/20 02:40:53 by lkiloul           #+#    #+#              #
-#    Updated: 2025/03/10 16:24:51 by lkiloul          ###   ########.fr        #
+#    Created: 2023/04/08 12:14:59 by utente            #+#    #+#              #
+#    Updated: 2025/03/17 11:53:08 by lkiloul          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+ARCHIVE = push_swap.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
+MAKE_LIB = ar -rcs
 
-# Directories
-SRC_DIR = srcs
-OBJ_DIR = obj
-INC_DIR = includes
-LIBS_DIR = libs
-LIBFT_DIR = $(LIBS_DIR)/libft
-LIBFT_INC_DIR = $(LIBFT_DIR)/includes
-LIBFT = $(LIBFT_DIR)/libft.a
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
-# Source files
-SRC_FILES = push_swap.c \
-            push.c \
-            rotate.c \
-            swap.c \
-            reverse_rotate.c \
-            utils.c \
-            algorithm.c \
-            sort_small.c \
-            turk_utils.c \
-            turk_operations.c
+all : $(NAME)
 
-# Object files
-SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+$(NAME) : $(ARCHIVE)
+	$(CC) $< -o $@
 
-# Includes and libraries
-INCLUDES = -I$(INC_DIR) -I$(LIBFT_INC_DIR)
-LIBS = -L$(LIBFT_DIR) -lft
+$(ARCHIVE) : $(OBJS)
+	$(MAKE_LIB) $(ARCHIVE) $^
 
-# Targets
-all: $(LIBFT) $(NAME)
+%.o : %.c 
+	$(CC) $(CFLAGS) -c $< -o $@ 
+	
+clean :
+	rm -f $(OBJS) $(ARCHIVE)
 
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
-
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBS) -o $(NAME)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-clean:
-	@make -C $(LIBFT_DIR) clean
-	rm -rf $(OBJ_DIR)
-
-fclean: clean
-	@make -C $(LIBFT_DIR) fclean
+fclean : clean
 	rm -f $(NAME)
+	make clean
 
-re: fclean all
+re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY : all clean fclea re

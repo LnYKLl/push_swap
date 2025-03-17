@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:07:13 by lkiloul           #+#    #+#             */
-/*   Updated: 2024/10/25 16:04:50 by lkiloul          ###   ########.fr       */
+/*   Created: 2023/04/01 18:53:55 by utente            #+#    #+#             */
+/*   Updated: 2025/03/17 10:15:57 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_isascii(int i)
+int	main(int argc, char **argv)
 {
-	if (i >= 0 && i <= 127)
+	t_stack_node	*a;
+	t_stack_node	*b;
+
+	a = NULL;
+	b = NULL;
+	if (1 == argc || (2 == argc && !argv[1][0]))
 		return (1);
-	else
-		return (0);
+	else if (2 == argc)
+		argv = ft_split(argv[1], ' ');
+	stack_init(&a, argv + 1, 2 == argc);
+	if (!stack_sorted(a))
+	{
+		if (stack_len(a) == 2)
+			sa(&a, false);
+		else if (stack_len(a) == 3)
+			tiny_sort(&a);
+		else
+			push_swap(&a, &b);
+	}
+	free_stack(&a);
 }
