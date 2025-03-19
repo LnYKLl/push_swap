@@ -6,7 +6,7 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 09:42:38 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:16:04 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:22:54 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
- *  atol, i need it to check eventual overflows
- *  converting every string into a long value
-*/
 static long	ft_atol(const char *str)
 {
 	long	num;
@@ -47,17 +43,7 @@ static long	ft_atol(const char *str)
 	return (num * isneg);
 }
 
-/*
- * Create the stack with the command line values
- * Checks are embedded in the creation itslef
- * 		~Duplicate values
- * 		~Over|Underflow
- * 		~Syntax errors
- *
- * 	🏁 Flag is useful cause if true, i have the argv in the HEAP to free
- *
-*/
-void	stack_init(t_stack_node **a, char **argv, bool flag_argc_2)
+void	stack_init(t_stack_node **a, char **argv, int flag_argc_2)
 {
 	long	nbr;
 	int		i;
@@ -68,7 +54,7 @@ void	stack_init(t_stack_node **a, char **argv, bool flag_argc_2)
 		if (error_syntax(argv[i]))
 			error_free(a, argv, flag_argc_2);
 		nbr = ft_atol(argv[i]);
-		if (nbr > INT_MAX || nbr < INT_MIN)
+		if (nbr > INT_MAX || nbr < -2147483648)
 			error_free(a, argv, flag_argc_2);
 		if (error_repetition(*a, (int)nbr))
 			error_free(a, argv, flag_argc_2);

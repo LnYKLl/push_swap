@@ -6,15 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:24:35 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:21:47 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:21:42 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Bottom to top
-*/
 static void	reverse_rotate(t_stack_node **stack)
 {
 	t_stack_node	*last;
@@ -31,15 +28,15 @@ static void	reverse_rotate(t_stack_node **stack)
 	last->next->prev = last;
 }
 
-void	rra(t_stack_node **a, bool checker)
+void	rra(t_stack_node **a, int checker)
 {
 	reverse_rotate(a);
 	if (!checker)
-		if (write(1, "rra\n", 4)  == -1)
+		if (write(1, "rra\n", 4) == -1)
 			exit(EXIT_FAILURE);
 }
 
-void	rrb(t_stack_node **b, bool checker)
+void	rrb(t_stack_node **b, int checker)
 {
 	reverse_rotate(b);
 	if (!checker)
@@ -47,7 +44,7 @@ void	rrb(t_stack_node **b, bool checker)
 			exit(EXIT_FAILURE);
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b, bool checker)
+void	rrr(t_stack_node **a, t_stack_node **b, int checker)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);

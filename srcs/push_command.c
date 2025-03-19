@@ -6,16 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:36:47 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:19:20 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:21:42 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Push a node to the top from src to dest
- * 🚨 attention If stack empty (i.e. NULL)
-*/
 static void	push(t_stack_node **dest, t_stack_node **src)
 {
 	t_stack_node	*node_to_push;
@@ -40,7 +36,7 @@ static void	push(t_stack_node **dest, t_stack_node **src)
 	}
 }
 
-void	pa(t_stack_node **a, t_stack_node **b, bool checker)
+void	pa(t_stack_node **a, t_stack_node **b, int checker)
 {
 	push(a, b);
 	if (!checker)
@@ -48,10 +44,10 @@ void	pa(t_stack_node **a, t_stack_node **b, bool checker)
 			exit(EXIT_FAILURE);
 }
 
-void	pb(t_stack_node **b, t_stack_node **a, bool checker)
+void	pb(t_stack_node **b, t_stack_node **a, int checker)
 {
 	push(b, a);
 	if (!checker)
-		if (write(1, "pb\n", 3) ==  -1)
-			exit(EXIT_FAILURE);;
+		if (write(1, "pb\n", 3) == -1)
+			exit(EXIT_FAILURE);
 }

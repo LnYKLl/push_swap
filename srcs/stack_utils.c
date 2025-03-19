@@ -6,7 +6,7 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 09:49:59 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:16:04 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:22:29 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ t_stack_node	*find_last_node(t_stack_node *head)
 	return (head);
 }
 
-/*
- * Search for the last node and append 
- * 🚨 Pay attention if the stack empty?
-*/
 void	append_node(t_stack_node **stack, int nbr)
 {
 	t_stack_node	*node;
@@ -51,9 +47,6 @@ void	append_node(t_stack_node **stack, int nbr)
 	}
 }
 
-/*
- * Find the smallest value node
-*/
 t_stack_node	*find_smallest(t_stack_node *stack)
 {
 	long			smallest;
@@ -61,7 +54,7 @@ t_stack_node	*find_smallest(t_stack_node *stack)
 
 	if (NULL == stack)
 		return (NULL);
-	smallest = LONG_MAX;
+	smallest = 2147483647;
 	while (stack)
 	{
 		if (stack->value < smallest)
@@ -74,10 +67,6 @@ t_stack_node	*find_smallest(t_stack_node *stack)
 	return (smallest_node);
 }
 
-/*
- * Return the cheapest node 
- * that is already flagged
-*/
 t_stack_node	*return_cheapest(t_stack_node *stack)
 {
 	if (NULL == stack)

@@ -6,16 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 09:53:41 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:23:08 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:21:42 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * ATTENTION
- * There may be only 2 nodes
-*/
 static void	swap(t_stack_node **head)
 {
 	int	len;
@@ -32,7 +28,7 @@ static void	swap(t_stack_node **head)
 	(*head)->prev = NULL;
 }
 
-void	sa(t_stack_node	**a, bool checker)
+void	sa(t_stack_node	**a, int checker)
 {
 	swap(a);
 	if (!checker)
@@ -40,7 +36,7 @@ void	sa(t_stack_node	**a, bool checker)
 			exit(EXIT_FAILURE);
 }
 
-void	sb(t_stack_node **b, bool checker)
+void	sb(t_stack_node **b, int checker)
 {
 	swap(b);
 	if (!checker)
@@ -48,7 +44,7 @@ void	sb(t_stack_node **b, bool checker)
 			exit(EXIT_FAILURE);
 }
 
-void	ss(t_stack_node **a, t_stack_node **b, bool checker)
+void	ss(t_stack_node **a, t_stack_node **b, int checker)
 {
 	swap(a);
 	swap(b);

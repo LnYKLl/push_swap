@@ -6,7 +6,7 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:53:55 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:15:57 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:20:38 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (!stack_sorted(a))
 	{
 		if (stack_len(a) == 2)
-			sa(&a, false);
+			sa(&a, 0);
 		else if (stack_len(a) == 3)
 			tiny_sort(&a);
 		else

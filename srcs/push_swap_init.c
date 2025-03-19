@@ -6,19 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 12:02:48 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:20:53 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:22:29 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
-#include <stdbool.h>
-#include <stdio.h>
 
-/*
- * Set the current position of every node 
- * in the current state-configuration
-*/
 void	set_current_position(t_stack_node *stack)
 {
 	int	i;
@@ -32,9 +25,9 @@ void	set_current_position(t_stack_node *stack)
 	{
 		stack->current_position = i;
 		if (i <= centerline)
-			stack->above_median = true;
+			stack->above_median = 1;
 		else
-			stack->above_median = false;
+			stack->above_median = 0;
 		stack = stack->next;
 		++i;
 	}
@@ -57,7 +50,7 @@ static void	set_target_node(t_stack_node *a,
 
 	while (b)
 	{
-		best_match_index = LONG_MAX;
+		best_match_index = 2147483647;
 		current_a = a;
 		while (current_a)
 		{
@@ -69,7 +62,7 @@ static void	set_target_node(t_stack_node *a,
 			}
 			current_a = current_a->next;
 		}
-		if (LONG_MAX == best_match_index)
+		if (2147483647 == best_match_index)
 			b->target_node = find_smallest(a);
 		else
 			b->target_node = target_node;
@@ -103,19 +96,15 @@ void	set_price(t_stack_node *a, t_stack_node *b)
 	}
 }
 
-/*
- * Flag the cheapest node in the current
- * stacks configurations
-*/
 void	set_cheapest(t_stack_node *b)
 {
 	long			best_match_value;
 	t_stack_node	*best_match_node;
 
-	best_match_node = false;
+	best_match_node = 0;
 	if (NULL == b)
 		return ;
-	best_match_value = LONG_MAX;
+	best_match_value = 2147483647;
 	while (b)
 	{
 		if (b->push_price < best_match_value)
@@ -125,7 +114,7 @@ void	set_cheapest(t_stack_node *b)
 		}
 		b = b->next;
 	}
-	best_match_node->cheapest = true;
+	best_match_node->cheapest = 1;
 }
 
 /*

@@ -6,20 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 20:57:22 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:18:28 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:21:13 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-/*
- * Ad hoc function to free the 2D array
- * created with the ft_split function
- * ATTENTION
- * You have to start from -1 
-*/
 void	free_matrix(char **argv)
 {
 	int	i;
@@ -32,9 +24,6 @@ void	free_matrix(char **argv)
 	free(argv - 1);
 }
 
-/*
- * Ad hoc function to free a stack
-*/
 void	free_stack(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
@@ -52,34 +41,23 @@ void	free_stack(t_stack_node **stack)
 	*stack = NULL;
 }
 
-/*
- * Matrix starts from -1
- * because i artificially made Up
- * equal to argv
-*/
-void	error_free(t_stack_node **a, char **argv, bool flag_argc_2)
+void	error_free(t_stack_node **a, char **argv, int flag_argc_2)
 {
 	free_stack(a);
 	if (flag_argc_2)
 		free_matrix(argv);
-		
-	if(write(2, "Error\n", 6)  == -1)
+	if (write(2, "Error\n", 6) == -1)
 		exit(EXIT_FAILURE);
 	exit(1);
 }
 
-/*
- * Check if there are some syntactical mistakes
-*/
 int	error_syntax(char *str_nbr)
 {
-	if (!(*str_nbr == '+'
-			|| *str_nbr == '-'
-			|| (*str_nbr >= '0' && *str_nbr <= '9')))
+	if (!(*str_nbr == '+' || *str_nbr == '-' || (*str_nbr >= '0'
+				&& *str_nbr <= '9')))
 		return (1);
-	if ((*str_nbr == '+'
-			|| *str_nbr == '-')
-		&& !(str_nbr[1] >= '0' && str_nbr[1] <= '9'))
+	if ((*str_nbr == '+' || *str_nbr == '-') && !(str_nbr[1] >= '0'
+			&& str_nbr[1] <= '9'))
 		return (1);
 	while (*++str_nbr)
 	{
@@ -89,9 +67,6 @@ int	error_syntax(char *str_nbr)
 	return (0);
 }
 
-/*
- * Loop into the stack for some repetition
-*/
 int	error_repetition(t_stack_node *a, int nbr)
 {
 	if (NULL == a)

@@ -6,15 +6,12 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:07:07 by utente            #+#    #+#             */
-/*   Updated: 2025/03/17 10:22:27 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/19 02:21:42 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Top node to bottom position
-*/
 static void	rotate(t_stack_node **stack)
 {
 	t_stack_node	*last_node;
@@ -29,17 +26,17 @@ static void	rotate(t_stack_node **stack)
 	(*stack)->prev = NULL;
 	last_node->next->prev = last_node;
 	last_node->next->next = NULL;
-}	
+}
 
-void	ra(t_stack_node **a, bool checker)
+void	ra(t_stack_node **a, int checker)
 {
 	rotate(a);
 	if (!checker)
-		if (write(1, "ra\n", 3)  == -1)
+		if (write(1, "ra\n", 3) == -1)
 			exit(EXIT_FAILURE);
 }
 
-void	rb(t_stack_node **b, bool checker)
+void	rb(t_stack_node **b, int checker)
 {
 	rotate(b);
 	if (!checker)
@@ -47,7 +44,7 @@ void	rb(t_stack_node **b, bool checker)
 			exit(EXIT_FAILURE);
 }
 
-void	rr(t_stack_node **a, t_stack_node **b, bool checker)
+void	rr(t_stack_node **a, t_stack_node **b, int checker)
 {
 	rotate(a);
 	rotate(b);
