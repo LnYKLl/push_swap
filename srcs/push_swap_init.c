@@ -6,7 +6,7 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 12:02:48 by utente            #+#    #+#             */
-/*   Updated: 2025/03/19 02:22:29 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/20 06:27:04 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,6 @@ void	set_cheapest(t_stack_node *b)
 	best_match_node->cheapest = 1;
 }
 
-/*
- * All the necessary values to make the push
- * 		~Relative Positions
- * 		~Target node, the b node to make emerge
- * 		~Price for every configuration
- * 		~Cheapest in the current configuration
-*/
 void	init_nodes(t_stack_node *a, t_stack_node *b)
 {
 	set_current_position(a);
