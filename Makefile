@@ -5,37 +5,62 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/08 12:14:59 by utente            #+#    #+#              #
-#    Updated: 2025/03/19 01:19:52 by lkiloul          ###   ########.fr        #
+#    Created: 2025/01/24 10:03:58 by lkiloul           #+#    #+#              #
+#    Updated: 2025/03/24 09:20:54 by lkiloul          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-INCDIR = includes
-CFLAGS = -Wall -Wextra -Werror -g -I$(INCDIR)
-MAKE_LIB = ar -rcs
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCDIR = srcs
-OBJDIR = obj
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+SRC_DIR = srcs
+OBJ_DIR = obj
+INC_DIR = includes
+LIBS_DIR = libs
+LIBFT_DIR = $(LIBS_DIR)/libft
+LIBFT_INC_DIR = $(LIBFT_DIR)/includes
+LIBFT = $(LIBFT_DIR)/libft.a
 
-all : $(NAME)
+SRC_FILES = main.c\
+			push.c\
+			rotate.c\
+			reverse_rotate.c\
+			swap.c\
+			free.c\
+			turk.c\
+			tiny_sort.c\
+			stack_utils.c\
+			stack_init.c\
+			push_swap_init.c
 
-$(NAME) : $(OBJS)
-	$(CC) $(OBJS) -o $@
+OBJ_FILES = $(SRC_FILES:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
-	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+INCLUDES = -I$(INC_DIR) -Imlx -I$(LIBFT_INC_DIR)
 
-clean :
-	rm -rf $(OBJDIR)
+LIBS = -L$(LIBFT_DIR) -lft
 
-fclean : clean
+all: $(LIBS) $(NAME)
+
+$(LIBS):
+	@make -C $(LIBFT_DIR)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(LIBS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	@make -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+fclean: clean
+	@make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re $(LIBFT)

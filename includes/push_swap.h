@@ -6,7 +6,7 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:42:44 by utente            #+#    #+#             */
-/*   Updated: 2025/03/19 02:21:58 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/24 09:18:08 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft.h"
 
 typedef struct s_stack_node
 {
@@ -29,7 +30,7 @@ typedef struct s_stack_node
 	struct s_stack_node	*prev;
 }				t_stack_node;	
 
-char			**ft_split(char *str, char separator);
+char	**ft_split(char const *s, char c);
 
 void			free_matrix(char **argv);
 void			error_free(t_stack_node **a, char **argv, int flag_argc_2);
