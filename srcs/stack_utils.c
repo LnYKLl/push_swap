@@ -6,12 +6,11 @@
 /*   By: lkiloul <lkiloul@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 09:49:59 by utente            #+#    #+#             */
-/*   Updated: 2025/03/19 02:22:29 by lkiloul          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:11:33 by lkiloul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 t_stack_node	*find_last_node(t_stack_node *head)
 {
